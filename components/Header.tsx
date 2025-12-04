@@ -15,7 +15,7 @@ export default function Header() {
           width={144}
           height={28}
           priority
-          className="w-36 md:w-auto h-auto"
+          className="w-[138px] md:w-auto h-auto"
         />
 
         <DropdownMenu>
@@ -26,6 +26,7 @@ export default function Header() {
                 alt="Units"
                 width={14}
                 height={14}
+                priority
                 className="w-auto h-auto"
               />
               Units
@@ -34,6 +35,7 @@ export default function Header() {
                 alt="Chevron Down"
                 width={9}
                 height={14}
+                priority
                 className="w-auto h-auto"
               />
             </Button>
