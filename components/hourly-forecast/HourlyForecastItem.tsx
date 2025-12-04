@@ -24,7 +24,7 @@ export default function HourlyForecastItem({
             width={40}
             height={40}
             className="h-auto w-auto"
-            priority
+            preload={true}
             fetchPriority="high"
           />
           <p className="flex-1 font-medium">{time}</p>

@@ -18,7 +18,7 @@ export default function CurrentWeather() {
           height={286}
           className="h-auto w-full"
           aria-hidden="true"
-          priority
+          preload={true}
           fetchPriority="high"
         />
       </picture>
@@ -36,7 +36,8 @@ export default function CurrentWeather() {
             width={120}
             height={120}
             className="h-auto w-auto"
-            priority
+            preload={true}
+            fetchPriority="high"
           />
           <p
             className="text-8xl font-semibold"
