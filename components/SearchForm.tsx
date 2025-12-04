@@ -8,14 +8,14 @@ import { SearchIcon } from "lucide-react";
 
 export default function SearchForm() {
   return (
-    <form className="flex flex-col gap-3 md:flex-row md:gap-4 md:max-w-xl mx-auto">
-      <InputGroup className="bg-(--neutral-800) text-(--neutral-200) border-none">
+    <form className="mx-auto flex flex-col gap-3 pb-8 md:max-w-xl md:flex-row md:gap-4 lg:pb-12">
+      <InputGroup className="border-none bg-(--neutral-800) text-(--neutral-200)">
         <InputGroupInput placeholder="Search for a place..." />
         <InputGroupAddon>
           <SearchIcon />
         </InputGroupAddon>
       </InputGroup>
-      <Button className="bg-(--blue-500) font-medium py-4 text-lg hover:bg-(--blue-700)">
+      <Button className="bg-(--blue-500) py-4 text-lg font-medium hover:bg-(--blue-700)">
         Search
       </Button>
     </form>

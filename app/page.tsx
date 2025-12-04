@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <h1 className="text-4xl pb-12 lg:pb-16 md:text-[3.25rem] text-center col-span-4 md:col-span-8 sm:max-w-96 mx-auto lg:max-w-none lg:col-span-12 leading-tight">
+      <h1 className="col-span-4 mx-auto pb-12 text-center text-4xl leading-tight sm:max-w-96 md:col-span-8 md:text-[3.25rem] lg:col-span-12 lg:max-w-none lg:pb-16">
         How’s the sky looking today?
       </h1>
       <section className="col-span-4 md:col-span-8 lg:col-span-12">

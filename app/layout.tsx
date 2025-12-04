@@ -28,7 +28,7 @@ export default function RootLayout({
         className={`${dmSans.variable} ${bricolageGrotesque.variable} antialiased`}
       >
         <main>
-          <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="mx-auto max-w-7xl px-4 md:px-6">
             <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12">
               {children}
             </div>
