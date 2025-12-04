@@ -9,7 +9,10 @@ import { Settings, ChevronDown } from "lucide-react";
 export default function Header() {
   return (
     <header className="col-span-4 pt-3 pb-12 md:col-span-8 md:pt-6 lg:col-span-12 lg:pt-12 lg:pb-16">
-      <div className="flex items-center justify-between">
+      <nav
+        className="flex items-center justify-between"
+        aria-label="Main navigation"
+      >
         <Image
           src="/images/logo.svg"
           alt="Weather App"
@@ -20,14 +23,17 @@ export default function Header() {
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button className="bg-(--neutral-800) px-3 py-4 text-sm md:text-base">
-              <Settings size={14} />
+            <Button
+              className="bg-(--neutral-800) px-3 py-4 text-sm md:text-base"
+              aria-label="Units settings"
+            >
+              <Settings size={14} aria-hidden="true" />
               Units
-              <ChevronDown size={9} />
+              <ChevronDown size={9} aria-hidden="true" />
             </Button>
           </DropdownMenuTrigger>
         </DropdownMenu>
-      </div>
+      </nav>
     </header>
   );
 }
