@@ -4,6 +4,7 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Settings, ChevronDown } from "lucide-react";
 
 export default function Header() {
   return (
@@ -17,27 +18,12 @@ export default function Header() {
           priority
           className="w-[138px] md:w-auto h-auto"
         />
-
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button className="px-3 py-4 text-sm md:text-base bg-(--neutral-800)">
-              <Image
-                src="/images/icon-units.svg"
-                alt="Units"
-                width={14}
-                height={14}
-                priority
-                className="w-auto h-auto"
-              />
+              <Settings size={14} />
               Units
-              <Image
-                src="/images/icon-dropdown.svg"
-                alt="Chevron Down"
-                width={9}
-                height={14}
-                priority
-                className="w-auto h-auto"
-              />
+              <ChevronDown size={9} />
             </Button>
           </DropdownMenuTrigger>
         </DropdownMenu>
