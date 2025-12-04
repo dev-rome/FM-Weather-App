@@ -3,16 +3,16 @@
 
 :root {
   /* Style Guide Color Palette */
-  --neutral-900: hsl(241, 96%, 9%);
-  --neutral-800: hsl(242, 27%, 20%);
-  --neutral-700: hsl(242, 22%, 24%);
-  --neutral-600: hsl(242, 23%, 30%);
-  --neutral-300: hsl(240, 7%, 70%);
-  --neutral-200: hsl(250, 7%, 84%);
+  --neutral-900: hsl(243, 96%, 9%);
+  --neutral-800: hsl(243, 27%, 20%);
+  --neutral-700: hsl(243, 23%, 24%);
+  --neutral-600: hsl(243, 23%, 30%);
+  --neutral-300: hsl(240, 6%, 70%);
+  --neutral-200: hsl(250, 6%, 84%);
   --neutral-0: hsl(0, 0%, 100%);
-  --orange-500: hsl(29, 100%, 52%);
-  --blue-500: hsl(233, 66%, 56%);
-  --blue-700: hsl(247, 70%, 36%);
+  --orange-500: hsl(28, 100%, 52%);
+  --blue-500: hsl(233, 67%, 56%);
+  --blue-700: hsl(248, 70%, 36%);
 
   /* Font Variables */
   --font-dm-sans: var(--font-dm-sans);

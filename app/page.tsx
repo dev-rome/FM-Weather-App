@@ -3,6 +3,7 @@ import SearchForm from "@/components/SearchForm";
 import CurrentWeather from "@/components/CurrentWeather";
 import WeatherDetails from "@/components/weather-details/WeatherDetails";
 import DailyForecast from "@/components/daily-forecast/DailyForecast";
+import HourlyForecast from "@/components/hourly-forecast/HourlyForecast";
 
 export default function Home() {
   return (
@@ -14,15 +15,15 @@ export default function Home() {
       <SearchForm />
       <section
         aria-label="Weather information"
-        className="col-span-4 grid grid-cols-1 gap-6 md:col-span-8 lg:col-span-12 lg:grid-cols-12"
+        className="col-span-4 grid grid-cols-1 gap-8 pb-12 md:col-span-8 md:pb-20 lg:col-span-12 lg:grid-cols-12"
       >
-        <div className="flex flex-col lg:col-span-8">
+        <div className="lg:col-span-8">
           <CurrentWeather />
           <WeatherDetails />
           <DailyForecast />
         </div>
-        <div className="flex flex-col lg:col-span-4">
-          {/* HourlyForecast will go here */}
+        <div className="lg:col-span-4">
+          <HourlyForecast />
         </div>
       </section>
     </>
