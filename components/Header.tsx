@@ -19,6 +19,7 @@ export default function Header() {
           width={144}
           height={28}
           priority
+          fetchPriority="high"
           className="h-auto w-[138px] md:w-auto"
         />
         <DropdownMenu>

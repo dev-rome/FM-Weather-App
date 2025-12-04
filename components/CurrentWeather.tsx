@@ -18,7 +18,8 @@ export default function CurrentWeather() {
           height={286}
           className="h-auto w-full"
           aria-hidden="true"
-          priority
+          preload={true}
+          fetchPriority="high"
         />
       </picture>
       <div className="absolute inset-0 flex w-full flex-col items-center justify-center md:flex-row md:justify-between md:px-6">
