@@ -4,10 +4,14 @@ import CurrentWeather from "@/components/CurrentWeather";
 import WeatherDetails from "@/components/weather-details/WeatherDetails";
 import DailyForecast from "@/components/daily-forecast/DailyForecast";
 import HourlyForecast from "@/components/hourly-forecast/HourlyForecast";
+import { WeatherProvider } from "@/contexts/WeatherContext";
+import { getWeather } from "@/lib/weather";
 
-export default function Home() {
+export default async function Home() {
+  const weatherData = await getWeather();
+
   return (
-    <>
+    <WeatherProvider initialData={weatherData}>
       <Header />
       <h1 className="col-span-4 mx-auto pb-12 text-center text-4xl leading-tight sm:max-w-96 md:col-span-8 md:text-[3.25rem] lg:col-span-12 lg:max-w-none lg:pb-16">
         How&apos;s the sky looking today?
@@ -26,6 +30,6 @@ export default function Home() {
           <HourlyForecast />
         </div>
       </section>
-    </>
+    </WeatherProvider>
   );
 }

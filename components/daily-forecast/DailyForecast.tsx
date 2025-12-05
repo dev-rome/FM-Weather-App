@@ -1,73 +1,42 @@
+"use client";
+
 import DailyForecastItem from "./DailyForecastItem";
-
-type DailyForecastData = {
-  day: string;
-  icon: string;
-  iconAlt: string;
-  highTemp: string;
-  lowTemp: string;
-};
-
-const dailyForecast: DailyForecastData[] = [
-  {
-    day: "Tue",
-    icon: "/images/icon-rain.webp",
-    iconAlt: "Rain",
-    highTemp: "20°",
-    lowTemp: "14°",
-  },
-  {
-    day: "Wed",
-    icon: "/images/icon-rain.webp",
-    iconAlt: "Rain",
-    highTemp: "21°",
-    lowTemp: "15°",
-  },
-  {
-    day: "Thu",
-    icon: "/images/icon-sunny.webp",
-    iconAlt: "Sunny",
-    highTemp: "24°",
-    lowTemp: "14°",
-  },
-  {
-    day: "Fri",
-    icon: "/images/icon-partly-cloudy.webp",
-    iconAlt: "Partly cloudy",
-    highTemp: "25°",
-    lowTemp: "13°",
-  },
-  {
-    day: "Sat",
-    icon: "/images/icon-storm.webp",
-    iconAlt: "Storm",
-    highTemp: "21°",
-    lowTemp: "15°",
-  },
-  {
-    day: "Sun",
-    icon: "/images/icon-snow.webp",
-    iconAlt: "Snow",
-    highTemp: "25°",
-    lowTemp: "16°",
-  },
-  {
-    day: "Mon",
-    icon: "/images/icon-fog.webp",
-    iconAlt: "Fog",
-    highTemp: "24°",
-    lowTemp: "15°",
-  },
-];
+import { useWeather } from "@/contexts/WeatherContext";
+import { getWeatherIcon } from "@/lib/weather-icons";
 
 export default function DailyForecast() {
+  const { weatherData } = useWeather();
+
+  if (!weatherData) {
+    return null;
+  }
+
+  const { daily } = weatherData;
+
+  // Map daily forecast data to component format
+  const dailyForecast = daily.date.map((dateString, index) => {
+    const date = new Date(dateString);
+    const dayName = date.toLocaleDateString("en-US", { weekday: "short" });
+    const weatherIcon = getWeatherIcon(daily.weatherCode[index]);
+
+    return {
+      day: dayName,
+      icon: weatherIcon.icon,
+      iconAlt: weatherIcon.alt,
+      highTemp: `${Math.round(daily.temperatureMax[index])}°`,
+      lowTemp: `${Math.round(daily.temperatureMin[index])}°`,
+    };
+  });
+
   return (
     <article aria-label="Daily forecast">
-      <h2 className="mb-5 text-xl font-semibold">Daily forecast</h2>
+      <h2 className="mb-5 text-xl font-semibold text-neutral-0">
+        Daily forecast
+      </h2>
       <div className="grid grid-cols-3 gap-4 md:grid-cols-7">
-        {dailyForecast.map(({ day, icon, iconAlt, highTemp, lowTemp }) => (
+        {dailyForecast.map(({ day, icon, iconAlt, highTemp, lowTemp }, index) => (
           <DailyForecastItem
-            key={day}
+            key={`${day}-${index}`}
             day={day}
             icon={icon}
             iconAlt={iconAlt}

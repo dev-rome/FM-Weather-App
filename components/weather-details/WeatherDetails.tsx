@@ -1,18 +1,29 @@
+"use client";
+
 import WeatherDetailsItem from "./WeatherDetailsItem";
+import { useWeather } from "@/contexts/WeatherContext";
 
 type WeatherMetric = {
   label: string;
   value: string;
 };
 
-const weatherMetrics: WeatherMetric[] = [
-  { label: "Feels Like", value: "18°" },
-  { label: "Humidity", value: "46%" },
-  { label: "Wind", value: "14 km/h" },
-  { label: "Precipitation", value: "0 mm" },
-];
-
 export default function WeatherDetails() {
+  const { weatherData } = useWeather();
+
+  if (!weatherData) {
+    return null;
+  }
+
+  const { current } = weatherData;
+
+  const weatherMetrics: WeatherMetric[] = [
+    { label: "Feels Like", value: `${Math.round(current.feelsLike)}°` },
+    { label: "Humidity", value: `${current.humidity}%` },
+    { label: "Wind", value: `${Math.round(current.windSpeed)} km/h` },
+    { label: "Precipitation", value: `${current.precipitation} mm` },
+  ];
+
   return (
     <article aria-label="Weather details" className="pb-8 lg:pb-12">
       <h2 className="sr-only">Current weather details</h2>

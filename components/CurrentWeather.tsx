@@ -1,6 +1,25 @@
+"use client";
+
 import Image from "next/image";
+import { useWeather } from "@/contexts/WeatherContext";
 
 export default function CurrentWeather() {
+  const { weatherData } = useWeather();
+
+  if (!weatherData) {
+    return null;
+  }
+
+  const { location, current } = weatherData;
+  const currentDate = new Date();
+  const formattedDate = currentDate.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+  const dateTime = currentDate.toISOString().split("T")[0];
+
   return (
     <article
       aria-label="Current weather conditions"
@@ -24,9 +43,14 @@ export default function CurrentWeather() {
       </picture>
       <div className="absolute inset-0 flex w-full flex-col items-center justify-center md:flex-row md:justify-between md:px-6">
         <div className="text-center md:text-left">
-          <h2 className="text-[1.75rem] font-bold">Berlin, Germany</h2>
-          <time dateTime="2025-08-05" className="text-lg font-medium">
-            Tuesday, Aug 5, 2025
+          <h2 className="text-[1.75rem] font-bold">
+            {location.name}, {location.country}
+          </h2>
+          <time
+            dateTime={dateTime}
+            className="text-lg font-medium"
+          >
+            {formattedDate}
           </time>
         </div>
         <div className="flex items-center">
@@ -41,9 +65,9 @@ export default function CurrentWeather() {
           />
           <p
             className="text-8xl font-semibold"
-            aria-label="Temperature 20 degrees"
+            aria-label={`Temperature ${Math.round(current.temperature)} degrees`}
           >
-            20°
+            {Math.round(current.temperature)}°
           </p>
         </div>
       </div>

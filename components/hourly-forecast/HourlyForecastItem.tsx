@@ -24,11 +24,10 @@ export default function HourlyForecastItem({
             width={40}
             height={40}
             className="h-auto w-auto"
-            preload={true}
-            fetchPriority="high"
+            loading="lazy"
           />
-          <p className="flex-1 font-medium">{time}</p>
-          <p className="text-base font-medium">{temperature}</p>
+          <p className="flex-1 font-medium text-neutral-0">{time}</p>
+          <p className="text-base font-medium text-neutral-0">{temperature}</p>
         </CardContent>
       </Card>
     </article>
