@@ -23,7 +23,7 @@ export default function UnitRadioItem<T extends string>({
     >
       <div className="flex w-full items-center justify-between">
         <span className="text-base font-medium">{label}</span>
-        {isSelected && <Check size={14} className="text-neutral-0" />}
+        {isSelected && <Check size={14} />}
       </div>
     </DropdownMenuRadioItem>
   );

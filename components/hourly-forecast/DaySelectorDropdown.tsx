@@ -24,7 +24,7 @@ export default function DaySelectorDropdown({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="bg-neutral-600 text-base text-neutral-0" aria-label="Select day">
+        <Button className="bg-neutral-600 text-base" aria-label="Select day">
           {selectedDay}
           <ChevronDown size={12} aria-hidden="true" />
         </Button>
@@ -35,7 +35,7 @@ export default function DaySelectorDropdown({
             <DropdownMenuRadioItem
               key={day}
               value={day}
-              className="cursor-pointer px-2 py-2.5 text-neutral-0 data-[state=checked]:bg-neutral-700 hover:bg-neutral-700 [&>span]:hidden"
+              className="cursor-pointer px-2 py-2.5 data-[state=checked]:bg-neutral-700 hover:bg-neutral-700 [&>span]:hidden"
             >
               {day}
             </DropdownMenuRadioItem>

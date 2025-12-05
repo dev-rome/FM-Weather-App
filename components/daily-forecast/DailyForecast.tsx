@@ -30,7 +30,7 @@ export default function DailyForecast() {
 
   return (
     <article aria-label="Daily forecast">
-      <h2 className="mb-5 text-xl font-semibold text-neutral-0">
+      <h2 className="mb-5 text-xl font-semibold">
         Daily forecast
       </h2>
       <div className="grid grid-cols-3 gap-4 md:grid-cols-7">

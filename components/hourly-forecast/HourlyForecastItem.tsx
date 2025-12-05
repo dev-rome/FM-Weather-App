@@ -26,8 +26,8 @@ export default function HourlyForecastItem({
             className="h-auto w-auto"
             loading="lazy"
           />
-          <p className="flex-1 font-medium text-neutral-0">{time}</p>
-          <p className="text-base font-medium text-neutral-0">{temperature}</p>
+          <p className="flex-1 font-medium">{time}</p>
+          <p className="text-base font-medium">{temperature}</p>
         </CardContent>
       </Card>
     </article>
