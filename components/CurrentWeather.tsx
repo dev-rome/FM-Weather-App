@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useWeather } from "@/contexts/WeatherContext";
+import { getWeatherIcon } from "@/lib/weather-icons";
 
 export default function CurrentWeather() {
   const { weatherData } = useWeather();
@@ -10,15 +11,27 @@ export default function CurrentWeather() {
     return null;
   }
 
-  const { location, current } = weatherData;
-  const currentDate = new Date();
-  const formattedDate = currentDate.toLocaleDateString("en-US", {
+  const { location, current, daily } = weatherData;
+  
+  // Get the weather icon based on the current weather code
+  const weatherIcon = getWeatherIcon(current.weatherCode);
+  
+  // Use the first date from daily forecast (today in location's timezone)
+  // Format it directly from the string to avoid timezone conversion
+  const todayDateString = daily.date[0]; // Format: "YYYY-MM-DD"
+  const [year, month, day] = todayDateString.split("-").map(Number);
+  
+  // Create date in local timezone but use the date values directly
+  // This ensures we show the date as it is, not shifted by timezone
+  const todayDate = new Date(year, month - 1, day); // month is 0-indexed
+  
+  const formattedDate = todayDate.toLocaleDateString("en-US", {
     weekday: "long",
     month: "short",
     day: "numeric",
     year: "numeric",
   });
-  const dateTime = currentDate.toISOString().split("T")[0];
+  const dateTime = todayDateString;
 
   return (
     <article
@@ -55,8 +68,8 @@ export default function CurrentWeather() {
         </div>
         <div className="flex items-center">
           <Image
-            src="/images/icon-sunny.webp"
-            alt="Sunny weather"
+            src={weatherIcon.icon}
+            alt={weatherIcon.alt}
             width={120}
             height={120}
             className="h-auto w-auto"
