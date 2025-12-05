@@ -1,18 +1,10 @@
 import type { Coordinates } from "@/types/weather";
 import type { OpenWeatherGeocodingItem } from "@/types/api";
+import { validateApiKey } from "./api-helpers";
 
-export async function getCoordinates(
-  cityName: string,
-): Promise<Coordinates> {
+export async function getCoordinates(cityName: string): Promise<Coordinates> {
   try {
-    const apiKey = process.env.OPENWEATHER_API_KEY;
-
-    if (!apiKey) {
-      throw new Error(
-        "OPENWEATHER_API_KEY is not set in environment variables",
-      );
-    }
-
+    const apiKey = validateApiKey();
     const url = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(cityName)}&limit=1&appid=${apiKey}`;
     const res = await fetch(url);
 
@@ -39,4 +31,3 @@ export async function getCoordinates(
     throw error;
   }
 }
-

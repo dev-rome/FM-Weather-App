@@ -6,14 +6,33 @@ import type {
 } from "@/types/weather";
 import type { OpenMeteoResponse } from "@/types/api";
 import { getCoordinates } from "./geocoding";
+import { getCityFromCoordinates } from "./reverse-geocoding";
 import { buildOpenMeteoUrl } from "./api-urls";
 
+/**
+ * Get weather data by city name
+ */
 export async function getWeather(
   cityName: string = "London",
 ): Promise<WeatherData> {
   try {
     const coordinates = await getCoordinates(cityName);
-    const url = buildOpenMeteoUrl(coordinates.lat, coordinates.lon);
+    return await getWeatherByCoordinates(coordinates.lat, coordinates.lon);
+  } catch (error) {
+    console.error("Weather Data Error:", error);
+    throw error;
+  }
+}
+
+/**
+ * Get weather data by coordinates (latitude and longitude)
+ */
+export async function getWeatherByCoordinates(
+  lat: number,
+  lon: number,
+): Promise<WeatherData> {
+  try {
+    const url = buildOpenMeteoUrl(lat, lon);
     const res = await fetch(url);
 
     if (!res.ok) {
@@ -23,6 +42,9 @@ export async function getWeather(
     }
 
     const data: OpenMeteoResponse = await res.json();
+
+    // Get city name from coordinates using reverse geocoding
+    const location = await getCityFromCoordinates(lat, lon);
 
     const current: CurrentWeather = {
       temperature: data.current.temperature_2m,
@@ -47,7 +69,7 @@ export async function getWeather(
     };
 
     return {
-      location: coordinates,
+      location,
       current,
       hourly,
       daily,

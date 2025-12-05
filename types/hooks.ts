@@ -1,7 +1,3 @@
-/**
- * Hook-related types
- */
-
 export type DayInfo = {
   date: string;
   dayName: string;
@@ -13,4 +9,11 @@ export type FormattedHourlyData = {
   icon: string;
   iconAlt: string;
   temperature: string;
+};
+
+export type GeolocationState = {
+  latitude: number | null;
+  longitude: number | null;
+  error: string | null;
+  loading: boolean;
 };
