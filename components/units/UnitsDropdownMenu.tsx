@@ -81,7 +81,6 @@ export default function UnitsDropdownMenu() {
               value={value}
               label={label}
               selectedValue={temperature}
-              onValueChange={setTemperature}
             />
           ))}
         </DropdownMenuRadioGroup>
@@ -101,7 +100,6 @@ export default function UnitsDropdownMenu() {
               value={value}
               label={label}
               selectedValue={windSpeed}
-              onValueChange={setWindSpeed}
             />
           ))}
         </DropdownMenuRadioGroup>
@@ -123,7 +121,6 @@ export default function UnitsDropdownMenu() {
               value={value}
               label={label}
               selectedValue={precipitation}
-              onValueChange={setPrecipitation}
             />
           ))}
         </DropdownMenuRadioGroup>

@@ -7,14 +7,12 @@ type UnitRadioItemProps<T extends string> = {
   value: T;
   label: string;
   selectedValue: T;
-  onValueChange: (value: T) => void;
 };
 
 export default function UnitRadioItem<T extends string>({
   value,
   label,
   selectedValue,
-  onValueChange,
 }: UnitRadioItemProps<T>) {
   const isSelected = value === selectedValue;
 
@@ -22,7 +20,6 @@ export default function UnitRadioItem<T extends string>({
     <DropdownMenuRadioItem
       value={value}
       className="cursor-pointer px-2 py-2.5 data-[state=checked]:bg-neutral-700 [&>span]:hidden"
-      onSelect={() => onValueChange(value)}
     >
       <div className="flex w-full items-center justify-between">
         <span className="text-base font-medium">{label}</span>
