@@ -1,13 +1,6 @@
-import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
-
-type DailyForecastItemProps = {
-  day: string;
-  icon: string;
-  iconAlt: string;
-  highTemp: string;
-  lowTemp: string;
-};
+import { Card, CardContent } from "@/components/ui/card";
+import type { DailyForecastItemProps } from "@/types/components";
 
 export default function DailyForecastItem({
   day,

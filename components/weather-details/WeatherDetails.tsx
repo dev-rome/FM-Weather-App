@@ -2,11 +2,8 @@
 
 import WeatherDetailsItem from "./WeatherDetailsItem";
 import { useWeather } from "@/contexts/WeatherContext";
-
-type WeatherMetric = {
-  label: string;
-  value: string;
-};
+import { formatTemperature, formatWindSpeed } from "@/lib/format-utils";
+import type { WeatherMetric } from "@/types/components";
 
 export default function WeatherDetails() {
   const { weatherData } = useWeather();
@@ -18,9 +15,9 @@ export default function WeatherDetails() {
   const { current } = weatherData;
 
   const weatherMetrics: WeatherMetric[] = [
-    { label: "Feels Like", value: `${Math.round(current.feelsLike)}°` },
+    { label: "Feels Like", value: formatTemperature(current.feelsLike) },
     { label: "Humidity", value: `${current.humidity}%` },
-    { label: "Wind", value: `${Math.round(current.windSpeed)} km/h` },
+    { label: "Wind", value: formatWindSpeed(current.windSpeed) },
     { label: "Precipitation", value: `${current.precipitation} mm` },
   ];
 

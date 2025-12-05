@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useWeather } from "@/contexts/WeatherContext";
 import { getWeatherIcon } from "@/lib/weather-icons";
+import { formatDate } from "@/lib/date-utils";
+import { formatTemperature } from "@/lib/format-utils";
 
 export default function CurrentWeather() {
   const { weatherData } = useWeather();
@@ -12,26 +14,13 @@ export default function CurrentWeather() {
   }
 
   const { location, current, daily } = weatherData;
-  
+
   // Get the weather icon based on the current weather code
   const weatherIcon = getWeatherIcon(current.weatherCode);
-  
+
   // Use the first date from daily forecast (today in location's timezone)
-  // Format it directly from the string to avoid timezone conversion
   const todayDateString = daily.date[0]; // Format: "YYYY-MM-DD"
-  const [year, month, day] = todayDateString.split("-").map(Number);
-  
-  // Create date in local timezone but use the date values directly
-  // This ensures we show the date as it is, not shifted by timezone
-  const todayDate = new Date(year, month - 1, day); // month is 0-indexed
-  
-  const formattedDate = todayDate.toLocaleDateString("en-US", {
-    weekday: "long",
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-  const dateTime = todayDateString;
+  const formattedDate = formatDate(todayDateString);
 
   return (
     <article
@@ -59,10 +48,7 @@ export default function CurrentWeather() {
           <h2 className="text-[1.75rem] font-bold">
             {location.name}, {location.country}
           </h2>
-          <time
-            dateTime={dateTime}
-            className="text-lg font-medium"
-          >
+          <time dateTime={todayDateString} className="text-lg font-medium">
             {formattedDate}
           </time>
         </div>
@@ -80,7 +66,7 @@ export default function CurrentWeather() {
             className="text-8xl font-semibold"
             aria-label={`Temperature ${Math.round(current.temperature)} degrees`}
           >
-            {Math.round(current.temperature)}°
+            {formatTemperature(current.temperature)}
           </p>
         </div>
       </div>

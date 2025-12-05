@@ -1,12 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
-
-type HourlyForecastItemProps = {
-  time: string;
-  icon: string;
-  iconAlt: string;
-  temperature: string;
-};
+import type { HourlyForecastItemProps } from "@/types/components";
 
 export default function HourlyForecastItem({
   time,

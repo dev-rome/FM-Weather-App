@@ -1,16 +1,13 @@
 "use server";
 
-import { getCoordinates } from "@/lib/weather";
+import type { CitySuggestion } from "@/types/search";
+import type { OpenWeatherGeocodingItem } from "@/types/api";
 
-export type CitySuggestion = {
-  name: string;
-  country: string;
-  state?: string;
-  lat: number;
-  lon: number;
-};
+export type { CitySuggestion };
 
-export async function getCitySuggestions(query: string): Promise<CitySuggestion[]> {
+export async function getCitySuggestions(
+  query: string,
+): Promise<CitySuggestion[]> {
   try {
     if (!query || query.trim().length < 2) {
       return [];
@@ -29,13 +26,13 @@ export async function getCitySuggestions(query: string): Promise<CitySuggestion[
       return [];
     }
 
-    const data = await res.json();
+    const data: OpenWeatherGeocodingItem[] = await res.json();
 
     if (!data || !Array.isArray(data)) {
       return [];
     }
 
-    return data.map((item: any) => ({
+    return data.map((item) => ({
       name: item.name,
       country: item.country,
       state: item.state,
@@ -47,4 +44,3 @@ export async function getCitySuggestions(query: string): Promise<CitySuggestion[
     return [];
   }
 }
-

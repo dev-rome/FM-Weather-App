@@ -1,7 +1,7 @@
 "use server";
 
 import { getWeather } from "@/lib/weather";
-import type { WeatherData } from "@/lib/weather";
+import type { WeatherData } from "@/types/weather";
 
 export async function searchWeather(cityName: string): Promise<{
   data?: WeatherData;
@@ -17,8 +17,8 @@ export async function searchWeather(cityName: string): Promise<{
   } catch (error) {
     console.error("Weather search error:", error);
     return {
-      error: error instanceof Error ? error.message : "Failed to fetch weather data",
+      error:
+        error instanceof Error ? error.message : "Failed to fetch weather data",
     };
   }
 }
-

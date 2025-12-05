@@ -2,12 +2,7 @@
 
 import { DropdownMenuRadioItem } from "@/components/ui/dropdown-menu";
 import { Check } from "lucide-react";
-
-type UnitRadioItemProps<T extends string> = {
-  value: T;
-  label: string;
-  selectedValue: T;
-};
+import type { UnitRadioItemProps } from "@/types/components";
 
 export default function UnitRadioItem<T extends string>({
   value,

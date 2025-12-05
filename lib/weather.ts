@@ -1,85 +1,19 @@
-// Types
-type Coordinates = {
-  lat: number;
-  lon: number;
-  name: string;
-  country: string;
-};
-
-type CurrentWeather = {
-  temperature: number;
-  weatherCode: number;
-  windSpeed: number;
-  humidity: number;
-  precipitation: number;
-  feelsLike: number;
-};
-
-type HourlyForecast = {
-  time: string[];
-  temperature: number[];
-  weatherCode: number[];
-};
-
-type DailyForecast = {
-  date: string[];
-  weatherCode: number[];
-  temperatureMax: number[];
-  temperatureMin: number[];
-};
-
-export type WeatherData = {
-  location: Coordinates;
-  current: CurrentWeather;
-  hourly: HourlyForecast;
-  daily: DailyForecast;
-};
-
-export async function getCoordinates(cityName: string): Promise<Coordinates> {
-  try {
-    const apiKey = process.env.OPENWEATHER_API_KEY;
-
-    if (!apiKey) {
-      throw new Error(
-        "OPENWEATHER_API_KEY is not set in environment variables",
-      );
-    }
-
-    const url = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(cityName)}&limit=1&appid=${apiKey}`;
-    const res = await fetch(url);
-
-    if (!res.ok) {
-      throw new Error(
-        `Failed to fetch coordinates: ${res.status} ${res.statusText}`,
-      );
-    }
-
-    const data = await res.json();
-
-    if (!data || data.length === 0) {
-      throw new Error(`Location "${cityName}" not found`);
-    }
-
-    return {
-      lat: data[0].lat,
-      lon: data[0].lon,
-      name: data[0].name,
-      country: data[0].country,
-    };
-  } catch (error) {
-    console.error("Geocoding Error:", error);
-    throw error;
-  }
-}
+import type {
+  WeatherData,
+  CurrentWeather,
+  HourlyForecast,
+  DailyForecast,
+} from "@/types/weather";
+import type { OpenMeteoResponse } from "@/types/api";
+import { getCoordinates } from "./geocoding";
+import { buildOpenMeteoUrl } from "./api-urls";
 
 export async function getWeather(
   cityName: string = "London",
 ): Promise<WeatherData> {
   try {
     const coordinates = await getCoordinates(cityName);
-
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${coordinates.lat}&longitude=${coordinates.lon}&current=temperature_2m,weather_code,wind_speed_10m,relative_humidity_2m,precipitation,apparent_temperature&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=7&timezone=auto`;
-
+    const url = buildOpenMeteoUrl(coordinates.lat, coordinates.lon);
     const res = await fetch(url);
 
     if (!res.ok) {
@@ -88,7 +22,7 @@ export async function getWeather(
       );
     }
 
-    const data = await res.json();
+    const data: OpenMeteoResponse = await res.json();
 
     const current: CurrentWeather = {
       temperature: data.current.temperature_2m,

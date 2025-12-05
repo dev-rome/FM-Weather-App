@@ -1,9 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-
-type WeatherDetailsItemProps = {
-  label: string;
-  value: string;
-};
+import type { WeatherDetailsItemProps } from "@/types/components";
 
 export default function WeatherDetailsItem({
   label,

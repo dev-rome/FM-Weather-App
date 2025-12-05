@@ -9,12 +9,7 @@ import {
   DropdownMenuRadioItem,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
-
-type DaySelectorDropdownProps = {
-  selectedDay: string;
-  onDayChange: (day: string) => void;
-  availableDays: string[];
-};
+import type { DaySelectorDropdownProps } from "@/types/components";
 
 export default function DaySelectorDropdown({
   selectedDay,
@@ -35,7 +30,7 @@ export default function DaySelectorDropdown({
             <DropdownMenuRadioItem
               key={day}
               value={day}
-              className="cursor-pointer px-2 py-2.5 data-[state=checked]:bg-neutral-700 hover:bg-neutral-700 [&>span]:hidden"
+              className="cursor-pointer px-2 py-2.5 hover:bg-neutral-700 data-[state=checked]:bg-neutral-700 [&>span]:hidden"
             >
               {day}
             </DropdownMenuRadioItem>

@@ -8,7 +8,15 @@ import { WeatherProvider } from "@/contexts/WeatherContext";
 import { getWeather } from "@/lib/weather";
 
 export default async function Home() {
-  const weatherData = await getWeather();
+  let weatherData;
+  
+  try {
+    weatherData = await getWeather();
+  } catch (error) {
+    console.error("Failed to fetch initial weather data:", error);
+    // Fallback to default location on error
+    weatherData = await getWeather("London");
+  }
 
   return (
     <WeatherProvider initialData={weatherData}>
