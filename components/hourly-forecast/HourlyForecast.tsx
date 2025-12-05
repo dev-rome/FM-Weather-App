@@ -2,15 +2,7 @@
 
 import { useState } from "react";
 import HourlyForecastItem from "./HourlyForecastItem";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { ChevronDown } from "lucide-react";
+import DaySelectorDropdown from "./DaySelectorDropdown";
 
 type HourlyForecastData = {
   time: string;
@@ -70,16 +62,6 @@ const hourlyForecast: HourlyForecastData[] = [
   },
 ];
 
-const days = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
-
 export default function HourlyForecast() {
   const [selectedDay, setSelectedDay] = useState("Tuesday");
 
@@ -90,33 +72,10 @@ export default function HourlyForecast() {
     >
       <div className="mb-5 flex items-center justify-between">
         <h2 className="text-xl font-semibold">Hourly forecast</h2>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              className="bg-neutral-600 text-base"
-              aria-label="Select day"
-            >
-              {selectedDay}
-              <ChevronDown size={12} aria-hidden="true" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="border-neutral-600 bg-neutral-800">
-            <DropdownMenuRadioGroup
-              value={selectedDay}
-              onValueChange={setSelectedDay}
-            >
-              {days.map((day) => (
-                <DropdownMenuRadioItem
-                  key={day}
-                  value={day}
-                  className="pl-2 data-[state=checked]:bg-neutral-700 [&>span]:hidden"
-                >
-                  {day}
-                </DropdownMenuRadioItem>
-              ))}
-            </DropdownMenuRadioGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <DaySelectorDropdown
+          selectedDay={selectedDay}
+          onDayChange={setSelectedDay}
+        />
       </div>
       <div className="flex flex-col gap-3">
         {hourlyForecast.map(({ time, icon, iconAlt, temperature }) => (

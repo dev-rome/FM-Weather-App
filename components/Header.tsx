@@ -1,10 +1,5 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Settings, ChevronDown } from "lucide-react";
+import UnitsDropdownMenu from "@/components/units/UnitsDropdownMenu";
 
 export default function Header() {
   return (
@@ -22,18 +17,7 @@ export default function Header() {
           fetchPriority="high"
           className="h-auto w-[138px] md:w-auto"
         />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              className="bg-(--neutral-800) px-3 py-4 text-sm md:text-base"
-              aria-label="Units settings"
-            >
-              <Settings size={14} aria-hidden="true" />
-              Units
-              <ChevronDown size={9} aria-hidden="true" />
-            </Button>
-          </DropdownMenuTrigger>
-        </DropdownMenu>
+        <UnitsDropdownMenu />
       </nav>
     </header>
   );
