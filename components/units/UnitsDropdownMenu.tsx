@@ -47,7 +47,7 @@ export default function UnitsDropdownMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          className="bg-(--neutral-800) px-3 py-4 text-sm md:text-base"
+          className="bg-neutral-800 px-3 py-4 text-sm md:text-base"
           aria-label="Units settings"
         >
           <Settings size={14} aria-hidden="true" />
@@ -61,7 +61,7 @@ export default function UnitsDropdownMenu() {
       >
         <Button
           onClick={isMetric ? switchToImperial : switchToMetric}
-          className="w-full cursor-pointer justify-start text-base font-medium hover:bg-neutral-700"
+          className="w-full cursor-pointer justify-start pl-2 text-base font-medium hover:bg-neutral-700"
         >
           {isMetric ? "Switch to Imperial" : "Switch to Metric"}
         </Button>

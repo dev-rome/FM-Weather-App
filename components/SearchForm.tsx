@@ -13,7 +13,7 @@ export default function SearchForm() {
       className="col-span-4 md:col-span-8 lg:col-span-12"
     >
       <form className="mx-auto flex flex-col gap-3 pb-8 md:max-w-xl md:flex-row md:gap-4 lg:pb-12">
-        <InputGroup className="border-none bg-(--neutral-800) text-(--neutral-200)">
+        <InputGroup className="border-none bg-neutral-800 text-neutral-200">
           <label htmlFor="location-search" className="sr-only">
             Search for a place
           </label>
@@ -28,7 +28,7 @@ export default function SearchForm() {
         </InputGroup>
         <Button
           type="submit"
-          className="bg-(--blue-500) py-4 text-lg font-medium hover:bg-(--blue-700)"
+          className="bg-blue-500 py-4 text-lg font-medium hover:bg-blue-700"
         >
           Search
         </Button>

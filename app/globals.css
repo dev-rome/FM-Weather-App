@@ -1,20 +1,18 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-:root {
-  /* Style Guide Color Palette */
-  --neutral-900: #02012c;
-  --neutral-800: #262540;
-  --neutral-700: #302f4a;
-  --neutral-600: #3c3b5e;
-  --neutral-300: #acacb7;
-  --neutral-200: #d4d3d9;
-  --neutral-0: #ffffff;
-  --orange-500: #ff820a;
-  --blue-500: #4658d9;
-  --blue-700: #2b1b9c;
+@theme {
+  --color-neutral-900: #02012c;
+  --color-neutral-800: #262540;
+  --color-neutral-700: #302f4a;
+  --color-neutral-600: #3c3b5e;
+  --color-neutral-300: #acacb7;
+  --color-neutral-200: #d4d3d9;
+  --color-neutral-0: #ffffff;
+  --color-orange-500: #ff820a;
+  --color-blue-500: #4658d9;
+  --color-blue-700: #2b1b9c;
 
-  /* Font Variables */
   --font-dm-sans: var(--font-dm-sans);
   --font-bricolage-grotesque: var(--font-bricolage-grotesque);
 }
@@ -22,8 +20,8 @@
 body {
   font-family: var(--font-dm-sans), sans-serif;
   min-height: 100vh;
-  background-color: var(--neutral-900);
-  color: var(--neutral-0);
+  background-color: var(--color-neutral-900);
+  color: var(--color-neutral-0);
   font-size: 1.125rem;
 }
 
