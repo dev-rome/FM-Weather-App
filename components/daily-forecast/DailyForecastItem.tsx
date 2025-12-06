@@ -12,19 +12,19 @@ export default function DailyForecastItem({
   return (
     <article aria-label={`${day} forecast`}>
       <Card className="border-neutral-600 bg-neutral-800">
-        <CardContent className="flex flex-col items-center gap-4 px-2.5 py-6">
-          <p className="text-lg font-medium">{day}</p>
+        <CardContent className="flex flex-col items-center gap-3 px-2.5 py-4">
+          <p className="text-sm font-medium">{day}</p>
           <Image
             src={icon}
             alt={iconAlt}
-            width={60}
-            height={60}
+            width={48}
+            height={48}
             className="h-auto w-auto"
             loading="lazy"
           />
-          <div className="flex w-full justify-between">
-            <span className="text-xl font-medium">{highTemp}</span>
-            <span className="text-xl font-medium text-neutral-200">
+          <div className="flex w-full items-center justify-center gap-3">
+            <span className="text-sm font-medium">{highTemp}</span>
+            <span className="text-sm font-medium text-neutral-300">
               {lowTemp}
             </span>
           </div>

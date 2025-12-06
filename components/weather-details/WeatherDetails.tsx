@@ -1,17 +1,14 @@
 "use client";
 
 import WeatherDetailsItem from "./WeatherDetailsItem";
-import { useWeather } from "@/contexts/WeatherContext";
+import { useWeatherData } from "@/contexts/WeatherDataContext";
+import { useUnits } from "@/contexts/UnitsContext";
 import { formatTemperature, formatWindSpeed, formatPrecipitation } from "@/lib/format-utils";
 import type { WeatherMetric } from "@/types/components";
 
 export default function WeatherDetails() {
-  const {
-    weatherData,
-    temperatureUnit,
-    windSpeedUnit,
-    precipitationUnit,
-  } = useWeather();
+  const { weatherData } = useWeatherData();
+  const { temperatureUnit, windSpeedUnit, precipitationUnit } = useUnits();
 
   if (!weatherData) {
     return null;

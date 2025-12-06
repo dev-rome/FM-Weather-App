@@ -1,9 +1,9 @@
 "use client";
 
-import { useWeather } from "@/contexts/WeatherContext";
+import { useWeatherData } from "@/contexts/WeatherDataContext";
 
 export default function WeatherBlurOverlay() {
-  const { isGeolocationReady, isSearching } = useWeather();
+  const { isGeolocationReady, isSearching } = useWeatherData();
 
   // Show overlay if geolocation is not ready OR if searching
   if (isGeolocationReady && !isSearching) {

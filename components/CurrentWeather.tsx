@@ -1,13 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { useWeather } from "@/contexts/WeatherContext";
+import { useWeatherData } from "@/contexts/WeatherDataContext";
+import { useUnits } from "@/contexts/UnitsContext";
 import { getWeatherIcon } from "@/lib/weather-icons";
 import { formatDate } from "@/lib/date-utils";
 import { formatTemperature } from "@/lib/format-utils";
 
 export default function CurrentWeather() {
-  const { weatherData, temperatureUnit } = useWeather();
+  const { weatherData } = useWeatherData();
+  const { temperatureUnit } = useUnits();
 
   if (!weatherData) {
     return null;

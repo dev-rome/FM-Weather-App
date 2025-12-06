@@ -1,13 +1,15 @@
 "use client";
 
 import DailyForecastItem from "./DailyForecastItem";
-import { useWeather } from "@/contexts/WeatherContext";
+import { useWeatherData } from "@/contexts/WeatherDataContext";
+import { useUnits } from "@/contexts/UnitsContext";
 import { getWeatherIcon } from "@/lib/weather-icons";
 import { formatDayName } from "@/lib/date-utils";
 import { formatTemperature } from "@/lib/format-utils";
 
 export default function DailyForecast() {
-  const { weatherData, temperatureUnit } = useWeather();
+  const { weatherData } = useWeatherData();
+  const { temperatureUnit } = useUnits();
 
   if (!weatherData) {
     return null;
@@ -23,14 +25,8 @@ export default function DailyForecast() {
       day: formatDayName(dateString),
       icon: weatherIcon.icon,
       iconAlt: weatherIcon.alt,
-      highTemp: formatTemperature(
-        daily.temperatureMax[index],
-        temperatureUnit,
-      ),
-      lowTemp: formatTemperature(
-        daily.temperatureMin[index],
-        temperatureUnit,
-      ),
+      highTemp: formatTemperature(daily.temperatureMax[index], temperatureUnit),
+      lowTemp: formatTemperature(daily.temperatureMin[index], temperatureUnit),
     };
   });
 

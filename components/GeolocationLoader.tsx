@@ -3,11 +3,11 @@
 import { useEffect, useTransition } from "react";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { getWeatherByLocation } from "@/app/actions/geolocation";
-import { useWeather } from "@/contexts/WeatherContext";
+import { useWeatherData } from "@/contexts/WeatherDataContext";
 
 export default function GeolocationLoader() {
   const { latitude, longitude, error, loading } = useGeolocation();
-  const { setWeatherData, setGeolocationReady, setError } = useWeather();
+  const { setWeatherData, setGeolocationReady, setError } = useWeatherData();
   const [, startTransition] = useTransition();
 
   useEffect(() => {
@@ -32,7 +32,15 @@ export default function GeolocationLoader() {
       // Mark geolocation as ready after update
       setGeolocationReady(true);
     });
-  }, [latitude, longitude, error, loading, setWeatherData, setGeolocationReady, setError]);
+  }, [
+    latitude,
+    longitude,
+    error,
+    loading,
+    setWeatherData,
+    setGeolocationReady,
+    setError,
+  ]);
 
   return null; // This component doesn't render anything
 }

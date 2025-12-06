@@ -2,11 +2,13 @@
 
 import HourlyForecastItem from "./HourlyForecastItem";
 import DaySelectorDropdown from "./DaySelectorDropdown";
-import { useWeather } from "@/contexts/WeatherContext";
+import { useWeatherData } from "@/contexts/WeatherDataContext";
+import { useUnits } from "@/contexts/UnitsContext";
 import { useHourlyForecast } from "@/hooks/useHourlyForecast";
 
 export default function HourlyForecast() {
-  const { weatherData, temperatureUnit } = useWeather();
+  const { weatherData } = useWeatherData();
+  const { temperatureUnit } = useUnits();
   const {
     availableDays,
     currentSelectedDay,
@@ -31,7 +33,7 @@ export default function HourlyForecast() {
           availableDays={availableDays.map((day) => day.dayName)}
         />
       </div>
-      <div className="max-h-[645px] overflow-y-auto">
+      <div className="max-h-[590px] overflow-y-auto">
         <div className="flex flex-col gap-3 pr-2">
           {filteredHourlyData.length > 0 ? (
             filteredHourlyData.map(

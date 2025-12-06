@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/input-group";
 import { Button } from "@/components/ui/button";
 import { SearchIcon } from "lucide-react";
-import { useWeather } from "@/contexts/WeatherContext";
+import { useWeatherData } from "@/contexts/WeatherDataContext";
 import { searchWeather } from "@/app/actions/weather";
 import type { CitySuggestion } from "@/types/search";
 import { useCitySuggestions } from "@/hooks/useCitySuggestions";
@@ -20,7 +20,7 @@ export default function SearchForm() {
   const [searchQuery, setSearchQuery] = useState("");
   const [showNoResults, setShowNoResults] = useState(false);
   const [isPending, startTransition] = useTransition();
-  const { setWeatherData, setIsSearching, setError } = useWeather();
+  const { setWeatherData, setIsSearching, setError } = useWeatherData();
   const { suggestions, open, setOpen } = useCitySuggestions(searchQuery);
 
   const handleSearch = (cityName: string) => {

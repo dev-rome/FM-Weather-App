@@ -10,7 +10,7 @@ import {
   DropdownMenuRadioGroup,
 } from "@/components/ui/dropdown-menu";
 import { Settings, ChevronDown } from "lucide-react";
-import { useWeather } from "@/contexts/WeatherContext";
+import { useUnits } from "@/contexts/UnitsContext";
 import type {
   TemperatureUnit,
   WindSpeedUnit,
@@ -31,7 +31,7 @@ export default function UnitsDropdownMenu() {
     setWindSpeedUnit,
     precipitationUnit,
     setPrecipitationUnit,
-  } = useWeather();
+  } = useUnits();
 
   const isMetric =
     temperatureUnit === "celsius" &&

@@ -1,10 +1,10 @@
 "use client";
 
-import { useWeather } from "@/contexts/WeatherContext";
+import { useWeatherData } from "@/contexts/WeatherDataContext";
 import SearchForm from "@/components/search-form/SearchForm";
 
 export default function ConditionalContent() {
-  const { error } = useWeather();
+  const { error } = useWeatherData();
 
   // Hide heading and search form when there's an error
   if (error) {
@@ -20,4 +20,3 @@ export default function ConditionalContent() {
     </>
   );
 }
-
