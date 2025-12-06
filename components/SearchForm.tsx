@@ -17,23 +17,28 @@ import SearchAutocomplete from "./search-form/SearchAutocomplete";
 
 export default function SearchForm() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [showNoResults, setShowNoResults] = useState(false);
   const [isPending, startTransition] = useTransition();
-  const { setWeatherData } = useWeather();
+  const { setWeatherData, setIsSearching } = useWeather();
   const { suggestions, open, setOpen } = useCitySuggestions(searchQuery);
 
   const handleSearch = (cityName: string) => {
-    setError(null);
     setOpen(false);
+    setShowNoResults(false);
+    setIsSearching(true);
 
     startTransition(async () => {
       const result = await searchWeather(cityName.trim());
 
-      if (result.error) {
-        setError(result.error);
-      } else if (result.data) {
+      if (result.data) {
         setWeatherData(result.data);
         setSearchQuery("");
+        setIsSearching(false);
+        setShowNoResults(false);
+      } else {
+        setWeatherData(null);
+        setShowNoResults(true);
+        setIsSearching(false);
       }
     });
   };
@@ -82,7 +87,7 @@ export default function SearchForm() {
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
-                    setError(null);
+                    setShowNoResults(false);
                   }}
                   onFocus={() => {
                     if (suggestions.length > 0) {
@@ -100,11 +105,6 @@ export default function SearchForm() {
           </SearchAutocomplete>
         </div>
 
-        {error && (
-          <p className="text-sm text-red-400" role="alert">
-            {error}
-          </p>
-        )}
         <Button
           type="submit"
           className="bg-blue-500 py-4 text-lg font-medium hover:bg-blue-700 disabled:opacity-50"
@@ -113,6 +113,13 @@ export default function SearchForm() {
           {isPending ? "Searching..." : "Search"}
         </Button>
       </form>
+      {showNoResults && (
+        <div className="mx-auto max-w-xl pb-8 text-center md:pb-12">
+          <p className="text-lg" role="alert">
+            No search result found!
+          </p>
+        </div>
+      )}
     </section>
   );
 }

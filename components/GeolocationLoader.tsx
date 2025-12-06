@@ -7,11 +7,17 @@ import { useWeather } from "@/contexts/WeatherContext";
 
 export default function GeolocationLoader() {
   const { latitude, longitude, error, loading } = useGeolocation();
-  const { setWeatherData } = useWeather();
+  const { setWeatherData, setGeolocationReady } = useWeather();
   const [, startTransition] = useTransition();
 
   useEffect(() => {
-    if (loading || error || !latitude || !longitude) {
+    if (loading) {
+      return;
+    }
+
+    // If geolocation failed or not available, mark as ready (no geolocation update)
+    if (error || !latitude || !longitude) {
+      setGeolocationReady(true);
       return;
     }
 
@@ -20,8 +26,10 @@ export default function GeolocationLoader() {
       if (result.data) {
         setWeatherData(result.data);
       }
+      // Mark geolocation as ready after update
+      setGeolocationReady(true);
     });
-  }, [latitude, longitude, error, loading, setWeatherData]);
+  }, [latitude, longitude, error, loading, setWeatherData, setGeolocationReady]);
 
   return null; // This component doesn't render anything
 }
