@@ -7,7 +7,7 @@ import { formatDayName } from "@/lib/date-utils";
 import { formatTemperature } from "@/lib/format-utils";
 
 export default function DailyForecast() {
-  const { weatherData } = useWeather();
+  const { weatherData, temperatureUnit } = useWeather();
 
   if (!weatherData) {
     return null;
@@ -23,8 +23,14 @@ export default function DailyForecast() {
       day: formatDayName(dateString),
       icon: weatherIcon.icon,
       iconAlt: weatherIcon.alt,
-      highTemp: formatTemperature(daily.temperatureMax[index]),
-      lowTemp: formatTemperature(daily.temperatureMin[index]),
+      highTemp: formatTemperature(
+        daily.temperatureMax[index],
+        temperatureUnit,
+      ),
+      lowTemp: formatTemperature(
+        daily.temperatureMin[index],
+        temperatureUnit,
+      ),
     };
   });
 

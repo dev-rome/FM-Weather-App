@@ -6,13 +6,13 @@ import { useWeather } from "@/contexts/WeatherContext";
 import { useHourlyForecast } from "@/hooks/useHourlyForecast";
 
 export default function HourlyForecast() {
-  const { weatherData } = useWeather();
+  const { weatherData, temperatureUnit } = useWeather();
   const {
     availableDays,
     currentSelectedDay,
     filteredHourlyData,
     setSelectedDay,
-  } = useHourlyForecast(weatherData);
+  } = useHourlyForecast(weatherData, temperatureUnit);
 
   if (!weatherData) {
     return null;

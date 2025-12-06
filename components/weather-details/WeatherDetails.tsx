@@ -2,11 +2,16 @@
 
 import WeatherDetailsItem from "./WeatherDetailsItem";
 import { useWeather } from "@/contexts/WeatherContext";
-import { formatTemperature, formatWindSpeed } from "@/lib/format-utils";
+import { formatTemperature, formatWindSpeed, formatPrecipitation } from "@/lib/format-utils";
 import type { WeatherMetric } from "@/types/components";
 
 export default function WeatherDetails() {
-  const { weatherData } = useWeather();
+  const {
+    weatherData,
+    temperatureUnit,
+    windSpeedUnit,
+    precipitationUnit,
+  } = useWeather();
 
   if (!weatherData) {
     return null;
@@ -15,10 +20,19 @@ export default function WeatherDetails() {
   const { current } = weatherData;
 
   const weatherMetrics: WeatherMetric[] = [
-    { label: "Feels Like", value: formatTemperature(current.feelsLike) },
+    {
+      label: "Feels Like",
+      value: formatTemperature(current.feelsLike, temperatureUnit),
+    },
     { label: "Humidity", value: `${current.humidity}%` },
-    { label: "Wind", value: formatWindSpeed(current.windSpeed) },
-    { label: "Precipitation", value: `${current.precipitation} mm` },
+    {
+      label: "Wind",
+      value: formatWindSpeed(current.windSpeed, windSpeedUnit),
+    },
+    {
+      label: "Precipitation",
+      value: formatPrecipitation(current.precipitation, precipitationUnit),
+    },
   ];
 
   return (

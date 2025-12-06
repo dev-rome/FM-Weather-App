@@ -9,8 +9,12 @@ import {
 import { formatTemperature } from "@/lib/format-utils";
 import type { WeatherData } from "@/types/weather";
 import type { DayInfo, FormattedHourlyData } from "@/types/hooks";
+import type { TemperatureUnit } from "@/components/units/types";
 
-export function useHourlyForecast(weatherData: WeatherData | null) {
+export function useHourlyForecast(
+  weatherData: WeatherData | null,
+  temperatureUnit: TemperatureUnit = "celsius",
+) {
   // Get available days from daily forecast
   const availableDays = useMemo<DayInfo[]>(() => {
     if (!weatherData) return [];
@@ -72,10 +76,10 @@ export function useHourlyForecast(weatherData: WeatherData | null) {
         time: formatTime(item.time),
         icon: weatherIcon.icon,
         iconAlt: weatherIcon.alt,
-        temperature: formatTemperature(item.temperature),
+        temperature: formatTemperature(item.temperature, temperatureUnit),
       };
     });
-  }, [currentSelectedDay, weatherData, availableDays]);
+  }, [currentSelectedDay, weatherData, availableDays, temperatureUnit]);
 
   return {
     availableDays,

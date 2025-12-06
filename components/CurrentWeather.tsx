@@ -7,7 +7,7 @@ import { formatDate } from "@/lib/date-utils";
 import { formatTemperature } from "@/lib/format-utils";
 
 export default function CurrentWeather() {
-  const { weatherData } = useWeather();
+  const { weatherData, temperatureUnit } = useWeather();
 
   if (!weatherData) {
     return null;
@@ -66,7 +66,7 @@ export default function CurrentWeather() {
             className="text-8xl font-semibold"
             aria-label={`Temperature ${Math.round(current.temperature)} degrees`}
           >
-            {formatTemperature(current.temperature)}
+            {formatTemperature(current.temperature, temperatureUnit)}
           </p>
         </div>
       </div>

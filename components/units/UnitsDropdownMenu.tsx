@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -11,6 +10,7 @@ import {
   DropdownMenuRadioGroup,
 } from "@/components/ui/dropdown-menu";
 import { Settings, ChevronDown } from "lucide-react";
+import { useWeather } from "@/contexts/WeatherContext";
 import type {
   TemperatureUnit,
   WindSpeedUnit,
@@ -24,23 +24,30 @@ import {
 import UnitRadioItem from "./UnitRadioItem";
 
 export default function UnitsDropdownMenu() {
-  const [temperature, setTemperature] = useState<TemperatureUnit>("celsius");
-  const [windSpeed, setWindSpeed] = useState<WindSpeedUnit>("kmh");
-  const [precipitation, setPrecipitation] = useState<PrecipitationUnit>("mm");
+  const {
+    temperatureUnit,
+    setTemperatureUnit,
+    windSpeedUnit,
+    setWindSpeedUnit,
+    precipitationUnit,
+    setPrecipitationUnit,
+  } = useWeather();
 
   const isMetric =
-    temperature === "celsius" && windSpeed === "kmh" && precipitation === "mm";
+    temperatureUnit === "celsius" &&
+    windSpeedUnit === "kmh" &&
+    precipitationUnit === "mm";
 
   const switchToImperial = () => {
-    setTemperature("fahrenheit");
-    setWindSpeed("mph");
-    setPrecipitation("in");
+    setTemperatureUnit("fahrenheit");
+    setWindSpeedUnit("mph");
+    setPrecipitationUnit("in");
   };
 
   const switchToMetric = () => {
-    setTemperature("celsius");
-    setWindSpeed("kmh");
-    setPrecipitation("mm");
+    setTemperatureUnit("celsius");
+    setWindSpeedUnit("kmh");
+    setPrecipitationUnit("mm");
   };
 
   return (
@@ -72,15 +79,17 @@ export default function UnitsDropdownMenu() {
           Temperature
         </DropdownMenuLabel>
         <DropdownMenuRadioGroup
-          value={temperature}
-          onValueChange={(value) => setTemperature(value as TemperatureUnit)}
+          value={temperatureUnit}
+          onValueChange={(value) =>
+            setTemperatureUnit(value as TemperatureUnit)
+          }
         >
           {TEMPERATURE_OPTIONS.map(({ value, label }) => (
             <UnitRadioItem
               key={value}
               value={value}
               label={label}
-              selectedValue={temperature}
+              selectedValue={temperatureUnit}
             />
           ))}
         </DropdownMenuRadioGroup>
@@ -91,15 +100,15 @@ export default function UnitsDropdownMenu() {
           Wind Speed
         </DropdownMenuLabel>
         <DropdownMenuRadioGroup
-          value={windSpeed}
-          onValueChange={(value) => setWindSpeed(value as WindSpeedUnit)}
+          value={windSpeedUnit}
+          onValueChange={(value) => setWindSpeedUnit(value as WindSpeedUnit)}
         >
           {WIND_SPEED_OPTIONS.map(({ value, label }) => (
             <UnitRadioItem
               key={value}
               value={value}
               label={label}
-              selectedValue={windSpeed}
+              selectedValue={windSpeedUnit}
             />
           ))}
         </DropdownMenuRadioGroup>
@@ -110,9 +119,9 @@ export default function UnitsDropdownMenu() {
           Precipitation
         </DropdownMenuLabel>
         <DropdownMenuRadioGroup
-          value={precipitation}
+          value={precipitationUnit}
           onValueChange={(value) =>
-            setPrecipitation(value as PrecipitationUnit)
+            setPrecipitationUnit(value as PrecipitationUnit)
           }
         >
           {PRECIPITATION_OPTIONS.map(({ value, label }) => (
@@ -120,7 +129,7 @@ export default function UnitsDropdownMenu() {
               key={value}
               value={value}
               label={label}
-              selectedValue={precipitation}
+              selectedValue={precipitationUnit}
             />
           ))}
         </DropdownMenuRadioGroup>

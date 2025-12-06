@@ -3,6 +3,11 @@
 import { createContext, useContext, useState } from "react";
 import type { WeatherContextType, WeatherProviderProps } from "@/types/context";
 import type { WeatherData } from "@/types/weather";
+import type {
+  TemperatureUnit,
+  WindSpeedUnit,
+  PrecipitationUnit,
+} from "@/components/units/types";
 
 const WeatherContext = createContext<WeatherContextType | undefined>(undefined);
 
@@ -18,6 +23,13 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
   // Track API errors
   const [error, setError] = useState<string | null>(null);
 
+  // Unit preferences
+  const [temperatureUnit, setTemperatureUnit] =
+    useState<TemperatureUnit>("celsius");
+  const [windSpeedUnit, setWindSpeedUnit] = useState<WindSpeedUnit>("kmh");
+  const [precipitationUnit, setPrecipitationUnit] =
+    useState<PrecipitationUnit>("mm");
+
   return (
     <WeatherContext.Provider
       value={{
@@ -29,6 +41,12 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
         setIsSearching,
         error,
         setError,
+        temperatureUnit,
+        setTemperatureUnit,
+        windSpeedUnit,
+        setWindSpeedUnit,
+        precipitationUnit,
+        setPrecipitationUnit,
       }}
     >
       {children}
