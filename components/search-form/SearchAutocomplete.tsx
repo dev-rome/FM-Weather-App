@@ -26,7 +26,7 @@ export default function SearchAutocomplete({
     <Popover open={open} onOpenChange={onOpenChange} modal={false}>
       <PopoverAnchor asChild>{children}</PopoverAnchor>
       <PopoverContent
-        className="w-(--radix-popover-trigger-width) border-0 p-0"
+        className="w-(--radix-popover-trigger-width) border-0 p-0 mt-2"
         align="start"
         onOpenAutoFocus={(e) => e.preventDefault()}
         onInteractOutside={(e) => {
