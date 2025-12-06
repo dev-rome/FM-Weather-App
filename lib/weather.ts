@@ -13,8 +13,11 @@ import { buildOpenMeteoUrl } from "./api-urls";
  * Get weather data by city name
  */
 export async function getWeather(
-  cityName: string = "London",
+  cityName: string | null,
 ): Promise<WeatherData> {
+  if (cityName == null) {
+    throw new Error("City name must be provided");
+  }
   try {
     const coordinates = await getCoordinates(cityName);
     return await getWeatherByCoordinates(coordinates.lat, coordinates.lon);

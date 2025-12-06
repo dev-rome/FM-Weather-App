@@ -7,6 +7,6 @@ export type WeatherContextType = {
 
 export type WeatherProviderProps = {
   children: React.ReactNode;
-  initialData: WeatherData;
+  initialWeatherPromise: Promise<WeatherData>;
 };
 
