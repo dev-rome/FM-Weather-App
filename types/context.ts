@@ -11,6 +11,4 @@ export type WeatherContextType = {
 
 export type WeatherProviderProps = {
   children: React.ReactNode;
-  initialWeatherPromise: Promise<WeatherData>;
 };
-

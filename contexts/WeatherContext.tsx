@@ -1,23 +1,13 @@
 "use client";
 
-import { createContext, useContext, useState, use } from "react";
+import { createContext, useContext, useState } from "react";
 import type { WeatherContextType, WeatherProviderProps } from "@/types/context";
 import type { WeatherData } from "@/types/weather";
 
 const WeatherContext = createContext<WeatherContextType | undefined>(undefined);
 
-export function WeatherProvider({
-  children,
-  initialWeatherPromise,
-}: WeatherProviderProps) {
-  // Use React's `use` hook to read the promise (handles streaming via Suspense)
-  const initialData = use(initialWeatherPromise);
-
-  // useState is needed to allow updates from search/geolocation
-  // The `use` hook only reads the promise once - it doesn't provide a way to update
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(
-    initialData,
-  );
+export function WeatherProvider({ children }: WeatherProviderProps) {
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
 
   // Track if geolocation has finished loading
   const [isGeolocationReady, setGeolocationReady] = useState(false);

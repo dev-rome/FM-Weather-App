@@ -1,5 +1,5 @@
 import Image from "next/image";
-import UnitsDropdownMenu from "@/components/units/UnitsDropdownMenu";
+import UnitsDropdownMenuClient from "@/components/units/UnitsDropdownMenuClient";
 
 export default function Header() {
   return (
@@ -17,7 +17,7 @@ export default function Header() {
           fetchPriority="high"
           className="h-auto w-[138px] md:w-auto"
         />
-        <UnitsDropdownMenu />
+        <UnitsDropdownMenuClient />
       </nav>
     </header>
   );
