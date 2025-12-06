@@ -1,6 +1,7 @@
 "use server";
 
 import { getWeatherByCoordinates } from "@/lib/weather";
+import { isApiError } from "@/lib/error-utils";
 import type { WeatherData } from "@/types/weather";
 
 export async function getWeatherByLocation(
@@ -23,11 +24,19 @@ export async function getWeatherByLocation(
     return { data: weatherData };
   } catch (error) {
     console.error("Geolocation weather error:", error);
+    const errorMessage = error instanceof Error
+      ? error.message
+      : "Failed to fetch weather for your location";
+    
+    // Check if it's an API/server error
+    if (isApiError(errorMessage)) {
+      return {
+        error: "API error: Unable to connect to weather service. Please try again later.",
+      };
+    }
+    
     return {
-      error:
-        error instanceof Error
-          ? error.message
-          : "Failed to fetch weather for your location",
+      error: errorMessage,
     };
   }
 }

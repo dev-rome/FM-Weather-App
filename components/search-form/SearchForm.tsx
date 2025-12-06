@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import React, { useState, useTransition } from "react";
 import {
   InputGroup,
   InputGroupAddon,
-  InputGroupInput
+  InputGroupInput,
 } from "@/components/ui/input-group";
 import { Button } from "@/components/ui/button";
 import { SearchIcon } from "lucide-react";
@@ -14,7 +14,7 @@ import type { CitySuggestion } from "@/types/search";
 import { useCitySuggestions } from "@/hooks/useCitySuggestions";
 import { formatCityName } from "@/lib/search-utils";
 import { isApiError } from "@/lib/error-utils";
-import SearchAutocomplete from "./search-form/SearchAutocomplete";
+import SearchAutocomplete from "./SearchAutocomplete";
 
 export default function SearchForm() {
   const [searchQuery, setSearchQuery] = useState("");

@@ -15,6 +15,9 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
   // Track if search is in progress
   const [isSearching, setIsSearching] = useState(false);
 
+  // Track API errors
+  const [error, setError] = useState<string | null>(null);
+
   return (
     <WeatherContext.Provider
       value={{
@@ -24,6 +27,8 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
         setGeolocationReady,
         isSearching,
         setIsSearching,
+        error,
+        setError,
       }}
     >
       {children}

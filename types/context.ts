@@ -7,6 +7,8 @@ export type WeatherContextType = {
   setGeolocationReady: (ready: boolean) => void;
   isSearching: boolean;
   setIsSearching: (searching: boolean) => void;
+  error: string | null;
+  setError: (error: string | null) => void;
 };
 
 export type WeatherProviderProps = {

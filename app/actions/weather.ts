@@ -1,6 +1,7 @@
 "use server";
 
 import { getWeather } from "@/lib/weather";
+import { isApiError } from "@/lib/error-utils";
 import type { WeatherData } from "@/types/weather";
 
 export async function searchWeather(cityName: string): Promise<{
@@ -16,9 +17,17 @@ export async function searchWeather(cityName: string): Promise<{
     return { data: weatherData };
   } catch (error) {
     console.error("Weather search error:", error);
+    const errorMessage = error instanceof Error ? error.message : "Failed to fetch weather data";
+    
+    // Check if it's an API/server error
+    if (isApiError(errorMessage)) {
+      return {
+        error: "API error: Unable to connect to weather service. Please try again later.",
+      };
+    }
+    
     return {
-      error:
-        error instanceof Error ? error.message : "Failed to fetch weather data",
+      error: errorMessage,
     };
   }
 }
