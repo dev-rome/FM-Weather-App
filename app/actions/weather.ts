@@ -16,7 +16,9 @@ export async function searchWeather(cityName: string): Promise<{
     const weatherData = await getWeather(cityName.trim());
     return { data: weatherData };
   } catch (error) {
-    console.error("Weather search error:", error);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Weather search error:", error);
+    }
     const errorMessage = error instanceof Error ? error.message : "Failed to fetch weather data";
     
     // Check if it's an API/server error

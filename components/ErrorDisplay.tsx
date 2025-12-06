@@ -6,15 +6,23 @@ import { useWeatherData } from "@/contexts/WeatherDataContext";
 import { isApiError } from "@/lib/error-utils";
 
 export default function ErrorDisplay() {
-  const { error } = useWeatherData();
+  const {
+    error,
+    geolocationHasAttempted,
+    requestGeolocation,
+    setError,
+  } = useWeatherData();
 
   if (!error) {
     return null;
   }
 
   const handleRetry = () => {
-    // Reload page to retry geolocation
-    window.location.reload();
+    setError(null);
+    // Retry geolocation if it was attempted, otherwise user can search
+    if (geolocationHasAttempted) {
+      requestGeolocation();
+    }
   };
 
   return (

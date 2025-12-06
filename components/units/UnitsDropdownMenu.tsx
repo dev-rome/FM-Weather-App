@@ -21,7 +21,7 @@ import {
   WIND_SPEED_OPTIONS,
   PRECIPITATION_OPTIONS,
 } from "./constants";
-import UnitRadioItem from "./UnitRadioItem";
+import UnitSection from "./UnitSection";
 
 export default function UnitsDropdownMenu() {
   const {
@@ -73,66 +73,24 @@ export default function UnitsDropdownMenu() {
           {isMetric ? "Switch to Imperial" : "Switch to Metric"}
         </Button>
 
-        <DropdownMenuSeparator className="bg-neutral-600" />
-
-        <DropdownMenuLabel className="px-2 py-1.5 text-sm text-neutral-300">
-          Temperature
-        </DropdownMenuLabel>
-        <DropdownMenuRadioGroup
+        <UnitSection
+          label="Temperature"
+          options={TEMPERATURE_OPTIONS}
           value={temperatureUnit}
-          onValueChange={(value) =>
-            setTemperatureUnit(value as TemperatureUnit)
-          }
-        >
-          {TEMPERATURE_OPTIONS.map(({ value, label }) => (
-            <UnitRadioItem
-              key={value}
-              value={value}
-              label={label}
-              selectedValue={temperatureUnit}
-            />
-          ))}
-        </DropdownMenuRadioGroup>
-
-        <DropdownMenuSeparator className="bg-neutral-600" />
-
-        <DropdownMenuLabel className="px-2 py-1.5 text-sm text-neutral-300">
-          Wind Speed
-        </DropdownMenuLabel>
-        <DropdownMenuRadioGroup
+          onValueChange={setTemperatureUnit}
+        />
+        <UnitSection
+          label="Wind Speed"
+          options={WIND_SPEED_OPTIONS}
           value={windSpeedUnit}
-          onValueChange={(value) => setWindSpeedUnit(value as WindSpeedUnit)}
-        >
-          {WIND_SPEED_OPTIONS.map(({ value, label }) => (
-            <UnitRadioItem
-              key={value}
-              value={value}
-              label={label}
-              selectedValue={windSpeedUnit}
-            />
-          ))}
-        </DropdownMenuRadioGroup>
-
-        <DropdownMenuSeparator className="bg-neutral-600" />
-
-        <DropdownMenuLabel className="px-2 py-1.5 text-sm text-neutral-300">
-          Precipitation
-        </DropdownMenuLabel>
-        <DropdownMenuRadioGroup
+          onValueChange={setWindSpeedUnit}
+        />
+        <UnitSection
+          label="Precipitation"
+          options={PRECIPITATION_OPTIONS}
           value={precipitationUnit}
-          onValueChange={(value) =>
-            setPrecipitationUnit(value as PrecipitationUnit)
-          }
-        >
-          {PRECIPITATION_OPTIONS.map(({ value, label }) => (
-            <UnitRadioItem
-              key={value}
-              value={value}
-              label={label}
-              selectedValue={precipitationUnit}
-            />
-          ))}
-        </DropdownMenuRadioGroup>
+          onValueChange={setPrecipitationUnit}
+        />
       </DropdownMenuContent>
     </DropdownMenu>
   );

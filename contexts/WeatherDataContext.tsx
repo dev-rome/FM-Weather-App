@@ -1,11 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useMemo } from "react";
 import type {
   WeatherDataContextType,
   WeatherDataProviderProps,
 } from "@/types/weather-context";
 import type { WeatherData } from "@/types/weather";
+import { useGeolocationState } from "@/hooks/useGeolocationState";
 
 const WeatherDataContext = createContext<WeatherDataContextType | undefined>(
   undefined,
@@ -13,29 +14,40 @@ const WeatherDataContext = createContext<WeatherDataContextType | undefined>(
 
 export function WeatherDataProvider({ children }: WeatherDataProviderProps) {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
-
-  // Track if geolocation has finished loading
   const [isGeolocationReady, setGeolocationReady] = useState(false);
-
-  // Track if search is in progress
   const [isSearching, setIsSearching] = useState(false);
-
-  // Track API errors
   const [error, setError] = useState<string | null>(null);
 
+  const geolocation = useGeolocationState();
+
+  const value = useMemo<WeatherDataContextType>(
+    () => ({
+      weatherData,
+      setWeatherData,
+      isGeolocationReady,
+      setGeolocationReady,
+      isSearching,
+      setIsSearching,
+      error,
+      setError,
+      geolocationLatitude: geolocation.latitude,
+      geolocationLongitude: geolocation.longitude,
+      geolocationError: geolocation.error,
+      geolocationLoading: geolocation.loading,
+      geolocationHasAttempted: geolocation.hasAttempted,
+      requestGeolocation: geolocation.requestGeolocation,
+    }),
+    [
+      weatherData,
+      isGeolocationReady,
+      isSearching,
+      error,
+      geolocation,
+    ],
+  );
+
   return (
-    <WeatherDataContext.Provider
-      value={{
-        weatherData,
-        setWeatherData,
-        isGeolocationReady,
-        setGeolocationReady,
-        isSearching,
-        setIsSearching,
-        error,
-        setError,
-      }}
-    >
+    <WeatherDataContext.Provider value={value}>
       {children}
     </WeatherDataContext.Provider>
   );

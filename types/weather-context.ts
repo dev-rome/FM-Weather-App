@@ -9,6 +9,13 @@ export type WeatherDataContextType = {
   setIsSearching: (searching: boolean) => void;
   error: string | null;
   setError: (error: string | null) => void;
+  // Geolocation state
+  geolocationLatitude: number | null;
+  geolocationLongitude: number | null;
+  geolocationError: string | null;
+  geolocationLoading: boolean;
+  geolocationHasAttempted: boolean;
+  requestGeolocation: () => void;
 };
 
 export type WeatherDataProviderProps = {

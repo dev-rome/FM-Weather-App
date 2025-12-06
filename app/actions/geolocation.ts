@@ -23,7 +23,9 @@ export async function getWeatherByLocation(
     const weatherData = await getWeatherByCoordinates(latitude, longitude);
     return { data: weatherData };
   } catch (error) {
-    console.error("Geolocation weather error:", error);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Geolocation weather error:", error);
+    }
     const errorMessage = error instanceof Error
       ? error.message
       : "Failed to fetch weather for your location";

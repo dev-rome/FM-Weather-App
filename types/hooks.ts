@@ -10,10 +10,3 @@ export type FormattedHourlyData = {
   iconAlt: string;
   temperature: string;
 };
-
-export type GeolocationState = {
-  latitude: number | null;
-  longitude: number | null;
-  error: string | null;
-  loading: boolean;
-};

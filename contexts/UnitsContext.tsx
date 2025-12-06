@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useMemo } from "react";
 import type {
   UnitsContextType,
   UnitsProviderProps,
@@ -20,20 +20,19 @@ export function UnitsProvider({ children }: UnitsProviderProps) {
   const [precipitationUnit, setPrecipitationUnit] =
     useState<PrecipitationUnit>("mm");
 
-  return (
-    <UnitsContext.Provider
-      value={{
-        temperatureUnit,
-        setTemperatureUnit,
-        windSpeedUnit,
-        setWindSpeedUnit,
-        precipitationUnit,
-        setPrecipitationUnit,
-      }}
-    >
-      {children}
-    </UnitsContext.Provider>
+  const value = useMemo<UnitsContextType>(
+    () => ({
+      temperatureUnit,
+      setTemperatureUnit,
+      windSpeedUnit,
+      setWindSpeedUnit,
+      precipitationUnit,
+      setPrecipitationUnit,
+    }),
+    [temperatureUnit, windSpeedUnit, precipitationUnit],
   );
+
+  return <UnitsContext.Provider value={value}>{children}</UnitsContext.Provider>;
 }
 
 export function useUnits() {
