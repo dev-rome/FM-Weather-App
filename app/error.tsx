@@ -2,13 +2,7 @@
 
 import ErrorDisplay from "@/components/ErrorDisplay";
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+export default function Error() {
   return <ErrorDisplay />;
 }
 

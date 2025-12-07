@@ -5,17 +5,9 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuRadioGroup,
 } from "@/components/ui/dropdown-menu";
 import { Settings, ChevronDown } from "lucide-react";
 import { useUnits } from "@/contexts/UnitsContext";
-import type {
-  TemperatureUnit,
-  WindSpeedUnit,
-  PrecipitationUnit,
-} from "./types";
 import {
   TEMPERATURE_OPTIONS,
   WIND_SPEED_OPTIONS,
